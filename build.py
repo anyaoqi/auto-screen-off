@@ -7,9 +7,14 @@ PyInstaller 打包脚本
     python build.py --version 0.1.0  # 指定版本号
 """
 
+import io
+import sys
 import PyInstaller.__main__
 import os
 import argparse
+
+# 强制使用 UTF-8 编码输出
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 # 项目根目录
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
