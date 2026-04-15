@@ -34,20 +34,17 @@ jobs:
       - name: Install dependencies
         shell: pwsh
         run: |
-          Set-Location project
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Run tests
         shell: pwsh
         run: |
-          Set-Location project
           pytest tests/ -v --tb=short
 
       - name: Build executable
         shell: pwsh
         run: |
-          Set-Location project
           python build.py --version ${{ steps.get_version.outputs.version }}
 
       - name: Generate release notes
@@ -81,7 +78,7 @@ jobs:
           draft: false
           prerelease: ${{ contains(github.ref_name, 'beta') || contains(github.ref_name, 'alpha') || contains(github.ref_name, 'rc') }}
           files: |
-            project/dist/小黑-自动息屏助手-v${{ steps.get_version.outputs.version }}.exe
+            dist/小黑-自动息屏助手-v${{ steps.get_version.outputs.version }}.exe
           generate_release_notes: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
