@@ -1,0 +1,7 @@
+{
+    "idle_timeout": 10,
+    "off_work_time": "18:30",
+    "on_work_time": "09:00",
+    "toast_countdown": 30,
+    "auto_start": false
+}
