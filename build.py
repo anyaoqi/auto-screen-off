@@ -31,9 +31,9 @@ def build(version=None):
 
     app_name = f"小黑-自动息屏助手-v{version}"
 
-    print(f"开始打包...")
-    print(f"版本: v{version}")
-    print(f"名称: {app_name}")
+    print("Starting build...")
+    print(f"Version: v{version}")
+    print(f"Name: {app_name}")
     print()
 
     PyInstaller.__main__.run(
@@ -58,9 +58,9 @@ def build(version=None):
     )
 
     print("\n" + "=" * 50)
-    print("OK 打包完成!")
-    print(f"版本: v{version}")
-    print(f"输出: {os.path.join(ROOT_DIR, 'dist', app_name)}.exe")
+    print("Build completed successfully!")
+    print(f"Version: v{version}")
+    print(f"Output: {os.path.join(ROOT_DIR, 'dist', app_name)}.exe")
     print("=" * 50)
 
 
