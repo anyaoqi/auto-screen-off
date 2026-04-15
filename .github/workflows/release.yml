@@ -52,37 +52,39 @@ jobs:
       - name: Generate release notes
         id: release_notes
         shell: pwsh
-        env:
-          APP_VERSION: ${{ steps.get_version.outputs.version }}
         run: |
-          $version = $env:APP_VERSION
-          $notes = @"
-          ## 小黑 - 自动息屏助手 v${version}
-
-          ### 功能特性
-          - 无操作自动息屏
-          - 息屏前友好提醒（Toast 通知 + 倒计时）
-          - 智能时段控制（仅下班后启用）
-          - 一键息屏
-          - 开机自启动
-          - 精致设置界面
-
-          ### 安装使用
-          下载 \`小黑-自动息屏助手-v${version}.exe\`，双击运行即可。
-          "@
-          Set-Content -Path release_notes.md -Value $notes -Encoding utf8
-          echo "notes_file=release_notes.md" >> $env:GITHUB_OUTPUT
+          $version = "${{ steps.get_version.outputs.version }}"
+          $notesPath = Join-Path $env:GITHUB_WORKSPACE "release_notes.md"
+          $lines = @(
+            "## 小黑 - 自动息屏助手 v${version}",
+            "",
+            "### 功能特性",
+            "- 无操作自动息屏",
+            "- 息屏前友好提醒（Toast 通知 + 倒计时）",
+            "- 智能时段控制（仅下班后启用）",
+            "- 一键息屏",
+            "- 开机自启动",
+            "- 精致设置界面",
+            "",
+            "### 安装使用",
+            "下载 小黑-自动息屏助手-v${version}.exe，双击运行即可。"
+          )
+          [System.IO.File]::WriteAllLines($notesPath, $lines, [System.Text.Encoding]::UTF8)
+          "notes_file=release_notes.md" >> $env:GITHUB_OUTPUT
 
       - name: Check build output
         shell: pwsh
         run: |
           $version = "${{ steps.get_version.outputs.version }}"
-          $exePath = "dist/小黑-自动息屏助手-v${version}.exe"
+          $exePath = Join-Path $env:GITHUB_WORKSPACE "dist/小黑-自动息屏助手-v${version}.exe"
           if (Test-Path $exePath) {
-            echo "Build artifact found: $exePath"
+            $size = [math]::Round((Get-Item $exePath).Length / 1MB, 2)
+            echo "Build artifact found: ${exePath} (${size} MB)"
           } else {
-            echo "ERROR: Build artifact not found at $exePath"
-            Get-ChildItem dist/
+            echo "ERROR: Build artifact not found!"
+            echo "Looking for: ${exePath}"
+            echo "Contents of dist/:"
+            Get-ChildItem (Join-Path $env:GITHUB_WORKSPACE "dist") -Recurse
             exit 1
           }
 
