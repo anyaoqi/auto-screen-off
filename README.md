@@ -3,10 +3,10 @@
 > 一款精致的 Windows 自动息屏工具，下班后智能检测无操作状态，自动关闭屏幕，节能减排好帮手。
 
 <p align="left">
-  <img src="https://img.shields.io/github/v/release/{owner}/{repo}?label=version&color=blue" alt="Version" />
+  <img src="https://img.shields.io/github/v/release/anyaoqi/auto-screen-off?label=version&color=blue" alt="Version" />
   <img src="https://img.shields.io/badge/platform-Windows%2010%2F11-lightgrey.svg" alt="Platform" />
-  <img src="https://img.shields.io/github/license/{owner}/{repo}?color=green" alt="License" />
-  <img src="https://img.shields.io/github/actions/workflow/status/{owner}/{repo}/release.yml?event=push&label=build" alt="Build Status" />
+  <img src="https://img.shields.io/github/license/anyaoqi/auto-screen-off?color=green" alt="License" />
+  <img src="https://img.shields.io/github/actions/workflow/status/anyaoqi/auto-screen-off/release.yml?event=push&label=build" alt="Build Status" />
 </p>
 
 ## ✨ 功能特性
